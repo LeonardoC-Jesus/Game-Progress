@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppDeProgresso</string>
+    <string name="adicionar_txt">Adicionar</string>
+    <string name="sair_txt">Sair</string>
+
+    <string name="salvar_txt">Salvar</string>
+    <string name="voltar_txt">Voltar</string>
+    <string name="atualizar_txt">Atualizar</string>
+
+</resources>

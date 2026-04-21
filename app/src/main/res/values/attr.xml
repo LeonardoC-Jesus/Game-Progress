@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomView">
+        <attr name="coordX" format="integer" />
+        <attr name="coordY" format="integer" />
+        <attr name="raio" format="integer" />
+        <attr name="texto" format="string" />
+        <attr name="cor_circulo" format="color" />
+        <attr name="cor_texto" format="color" />
+    </declare-styleable>
+</resources>
