@@ -1,5 +1,6 @@
 package edu.ucsal.appdeprogresso;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -32,11 +33,6 @@ public class GameProgress extends View {
 
     public void setOnCircleClickListener(OnCircleClickListener listener) {
         this.listener = listener;
-    }
-
-    public void setProgresso(float progresso) {
-        this.progresso = progresso;
-        invalidate();
     }
 
     public GameProgress(Context context, @Nullable AttributeSet attrs) {
@@ -72,6 +68,7 @@ public class GameProgress extends View {
 
 
     @Override
+    @SuppressLint("DrawAllocation")
     protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
@@ -92,7 +89,7 @@ public class GameProgress extends View {
     }
 
     @Override
-    public  boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         float toqueX = event.getX();
         float toqueY = event.getY();
 
@@ -109,6 +106,10 @@ public class GameProgress extends View {
         return true;
     }
 
+    public void setProgress(float progresso) {
+        this.progresso = progresso;
+        invalidate();
+    }
     public float getProgresso() {
         return progresso;
     }

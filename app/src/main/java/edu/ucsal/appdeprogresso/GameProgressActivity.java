@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GameProgressActivity extends AppCompatActivity implements View.OnClickListener {
     private float progressoAtual;
     private float progressoAtualEmPorcentagem;
-    private float progressoAnterior;
     private boolean visualizacaoEmPorcentagem = false;
 
     @Override
@@ -56,7 +55,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         if (reiniciaProgresso) {
             progressoAtual = 0;
             progressoAtualEmPorcentagem = 0;
-            gameProgress.setProgresso(0f);
+            gameProgress.setProgress(0f);
         }
 
         gameProgress.setTexto(progressoAtual + "/" + totalFasesSalvas);
@@ -92,7 +91,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
             animator.setDuration(500);
             animator.addUpdateListener(animation -> {
                 float progressoAnimado = (float) animation.getAnimatedValue();
-            gameProgress.setProgresso(progressoAnimado);
+            gameProgress.setProgress(progressoAnimado);
             });
             animator.start();
         }
@@ -121,7 +120,6 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         GameProgress gameProgress = findViewById(R.id.gameProgress);
 
         if (progressoAtual < Integer.parseInt(totalFasesSalvas)) {
-            progressoAnterior = progressoAtual;
             progressoAtual++;
             gameProgress.setTexto(String.format("%.0f", progressoAtual) + "/" + totalFasesSalvas);
         } else {
@@ -138,7 +136,6 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         GameProgress gameProgress = findViewById(R.id.gameProgress);
 
         if (progressoAtualEmPorcentagem < 100) {
-            progressoAnterior = progressoAtual;
             progressoAtual++;
             progressoAtualEmPorcentagem = (100 * progressoAtual) / fasesTotal;
             gameProgress.setTexto(String.format("%.0f", progressoAtualEmPorcentagem) + "%");
