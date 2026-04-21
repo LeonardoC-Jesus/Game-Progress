@@ -1,5 +1,6 @@
 package edu.ucsal.appdeprogresso;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameProgressActivity extends AppCompatActivity implements View.OnClickListener {
     private float progressoAtual;
-    private float progressoAtualEmPorcentagem = 0;
+    private float progressoAtualEmPorcentagem;
     private boolean visualizacaoEmPorcentagem = false;
 
     @Override
@@ -50,6 +51,9 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         totalFases.setText(totalFasesSalvas);
 
         GameProgress gameProgress = findViewById(R.id.gameProgress);
+        progressoAtual = 0;
+        progressoAtualEmPorcentagem = 0;
+        gameProgress.setProgresso(0f);
         gameProgress.setTexto(progressoAtual + "/" + totalFasesSalvas);
     }
 
@@ -87,14 +91,14 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
 
         GameProgress gameProgress = findViewById(R.id.gameProgress);
         if (gameProgress.getTexto().contains("/")) {
-            gameProgress.setTexto(progressoAtualEmPorcentagem+"%");
+            gameProgress.setTexto(String.format("%.0f", progressoAtualEmPorcentagem)+"%");
             visualizacaoEmPorcentagem = true;
         } else {
             gameProgress.setTexto(progressoAtual + "/" + totalFasesSalvas);
             visualizacaoEmPorcentagem = false;
         }
     }
-
+    @SuppressLint("DefaultLocale")
     public void atualizarProgressoEmBarra() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
@@ -103,12 +107,11 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
 
         if (progressoAtual < Integer.parseInt(totalFasesSalvas)) {
             progressoAtual++;
-            gameProgress.setTexto(progressoAtual + "/" + totalFasesSalvas);
+            gameProgress.setTexto(String.format("%.0f", progressoAtual) + "/" + totalFasesSalvas);
         } else {
             Toast.makeText(this, "Progresso já foi completado totalmente!!", Toast.LENGTH_SHORT).show();
         }
     }
-
     public void atualizarProgressoEmPorcentagem() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
