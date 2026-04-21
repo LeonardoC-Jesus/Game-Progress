@@ -108,6 +108,11 @@ public class GameProgress extends View {
         }
         return true;
     }
+
+    public float getProgresso() {
+        return progresso;
+    }
+
     public void setTexto(String novoTexto) {
         this.texto = novoTexto;
         invalidate();

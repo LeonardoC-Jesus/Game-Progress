@@ -15,7 +15,6 @@ public class GameAddActivity extends AppCompatActivity implements View.OnClickLi
 
     private EditText editNomeJogo;
     private EditText editTotalFases;
-    private boolean reiniciarProgresso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

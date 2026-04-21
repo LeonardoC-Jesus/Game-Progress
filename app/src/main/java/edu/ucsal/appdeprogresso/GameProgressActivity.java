@@ -1,5 +1,6 @@
 package edu.ucsal.appdeprogresso;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GameProgressActivity extends AppCompatActivity implements View.OnClickListener {
     private float progressoAtual;
     private float progressoAtualEmPorcentagem;
+    private float progressoAnterior;
     private boolean visualizacaoEmPorcentagem = false;
 
     @Override
@@ -84,8 +85,16 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
             progressoAtualEmPorcentagem = (100 * progressoAtual) / total;
 
             GameProgress gameProgress = findViewById(R.id.gameProgress);
-            float progresso = progressoAtualEmPorcentagem / 100f;
-            gameProgress.setProgresso(progresso);
+            float valorIncial = gameProgress.getProgresso();
+            float valorFinal = progressoAtualEmPorcentagem / 100f;
+
+            ValueAnimator animator = ValueAnimator.ofFloat(valorIncial, valorFinal);
+            animator.setDuration(500);
+            animator.addUpdateListener(animation -> {
+                float progressoAnimado = (float) animation.getAnimatedValue();
+            gameProgress.setProgresso(progressoAnimado);
+            });
+            animator.start();
         }
     }
 
@@ -112,6 +121,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         GameProgress gameProgress = findViewById(R.id.gameProgress);
 
         if (progressoAtual < Integer.parseInt(totalFasesSalvas)) {
+            progressoAnterior = progressoAtual;
             progressoAtual++;
             gameProgress.setTexto(String.format("%.0f", progressoAtual) + "/" + totalFasesSalvas);
         } else {
@@ -128,6 +138,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         GameProgress gameProgress = findViewById(R.id.gameProgress);
 
         if (progressoAtualEmPorcentagem < 100) {
+            progressoAnterior = progressoAtual;
             progressoAtual++;
             progressoAtualEmPorcentagem = (100 * progressoAtual) / fasesTotal;
             gameProgress.setTexto(String.format("%.0f", progressoAtualEmPorcentagem) + "%");
