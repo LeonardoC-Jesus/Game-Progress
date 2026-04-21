@@ -15,6 +15,7 @@ public class GameAddActivity extends AppCompatActivity implements View.OnClickLi
 
     private EditText editNomeJogo;
     private EditText editTotalFases;
+    private boolean reiniciarProgresso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +33,25 @@ public class GameAddActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         if (v.getId() == R.id.button_salvar) {
 
             String nomeJogoInput = editNomeJogo.getText().toString();
             String totalFasesInput = editTotalFases.getText().toString();
 
-            SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-
             editor.putString("SAVED_NOME_JOGO", nomeJogoInput);
             editor.putString("SAVED_TOTAL_FASES", totalFasesInput);
+            editor.putBoolean("SAVED_REINICIA_PROGRESSO", true);
             editor.apply();
 
             Toast.makeText(this, "Jogo salvo!!", Toast.LENGTH_SHORT).show();
             finish();
         }
         if (v.getId() == R.id.button_voltar) {
+            editor.putBoolean("SAVED_REINICIA_PROGRESSO", false);
+            editor.apply();
             finish();
         }
     }

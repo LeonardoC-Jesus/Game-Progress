@@ -44,6 +44,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String nomeJogoSalvo = sharedPreferences.getString("SAVED_NOME_JOGO", null);
         String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
+        boolean reiniciaProgresso = sharedPreferences.getBoolean("SAVED_REINICIA_PROGRESSO", false);
 
         TextView nomeJogo = findViewById(R.id.nome_jogo);
         nomeJogo.setText(nomeJogoSalvo);
@@ -51,9 +52,12 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         totalFases.setText(totalFasesSalvas);
 
         GameProgress gameProgress = findViewById(R.id.gameProgress);
-        progressoAtual = 0;
-        progressoAtualEmPorcentagem = 0;
-        gameProgress.setProgresso(0f);
+        if (reiniciaProgresso) {
+            progressoAtual = 0;
+            progressoAtualEmPorcentagem = 0;
+            gameProgress.setProgresso(0f);
+        }
+
         gameProgress.setTexto(progressoAtual + "/" + totalFasesSalvas);
     }
 
@@ -85,6 +89,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    @SuppressLint("DefaultLocale")
     public void trocarVisualizacaoDeProgresso() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
@@ -98,6 +103,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
             visualizacaoEmPorcentagem = false;
         }
     }
+
     @SuppressLint("DefaultLocale")
     public void atualizarProgressoEmBarra() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
