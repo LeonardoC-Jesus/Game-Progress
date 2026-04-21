@@ -13,8 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameProgressActivity extends AppCompatActivity implements View.OnClickListener {
-    private String progresso = "0";
-    private float progressoAtual = 0;
+    private float progressoAtual;
     private float progressoAtualEmPorcentagem = 0;
     private boolean visualizacaoEmPorcentagem = false;
 
@@ -65,11 +64,10 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
             finishAffinity();
         }
         if (v.getId() == R.id.button_atualizar) {
-            progressoAtual++;
             if (!visualizacaoEmPorcentagem) {
-                atualizarProgressoEmBarra(progressoAtual);
+                atualizarProgressoEmBarra();
             } else {
-                atualizarProgressoEmPorcentagem(progressoAtual);
+                atualizarProgressoEmPorcentagem();
             }
             SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
             String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
@@ -97,33 +95,32 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    public void atualizarProgressoEmBarra(float progressoAtual) {
+    public void atualizarProgressoEmBarra() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
-        progresso = String.valueOf(progressoAtual);
 
         GameProgress gameProgress = findViewById(R.id.gameProgress);
 
-        if (progressoAtual <= Integer.parseInt(totalFasesSalvas)) {
-            gameProgress.setTexto(progresso + "/" + totalFasesSalvas);
+        if (progressoAtual < Integer.parseInt(totalFasesSalvas)) {
+            progressoAtual++;
+            gameProgress.setTexto(progressoAtual + "/" + totalFasesSalvas);
         } else {
             Toast.makeText(this, "Progresso já foi completado totalmente!!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void atualizarProgressoEmPorcentagem(float progressoAtual) {
+    public void atualizarProgressoEmPorcentagem() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
-        progresso = String.valueOf(progressoAtual);
 
         int fasesTotal = Integer.parseInt(totalFasesSalvas);
 
-        progressoAtualEmPorcentagem = (100/fasesTotal) * progressoAtual;
-
         GameProgress gameProgress = findViewById(R.id.gameProgress);
 
-        if (progressoAtualEmPorcentagem <= 100) {
-            gameProgress.setTexto(progressoAtualEmPorcentagem+"%");
+        if (progressoAtualEmPorcentagem < 100) {
+            progressoAtual++;
+            progressoAtualEmPorcentagem = (100/fasesTotal) * progressoAtual;
+            gameProgress.setTexto(progressoAtualEmPorcentagem + "%");
         } else {
             Toast.makeText(this, "Progresso já foi completado totalmente!!", Toast.LENGTH_SHORT).show();
         }

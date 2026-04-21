@@ -30,7 +30,6 @@ public class GameAddActivity extends AppCompatActivity implements View.OnClickLi
         editTotalFases = (EditText) findViewById(R.id.input_fase);
     }
 
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_salvar) {
