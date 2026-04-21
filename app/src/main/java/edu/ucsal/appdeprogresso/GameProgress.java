@@ -78,7 +78,7 @@ public class GameProgress extends View {
         canvas.drawCircle(coordenadaX, coordenadaY, raioCirculo, paintCirculo);
 
         float angulo = progresso * 360;
-        paintProgresso.setColor(Color.RED);
+        paintProgresso.setColor(Color.GREEN);
         android.graphics.RectF oval =
                 new android.graphics.RectF(coordenadaX - raioCirculo,
                         coordenadaY - raioCirculo,

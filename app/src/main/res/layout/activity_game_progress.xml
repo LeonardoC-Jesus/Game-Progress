@@ -5,6 +5,7 @@
     android:id="@+id/gameProgressActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#121212"
     tools:context=".GameProgressActivity">
 
     <edu.ucsal.appdeprogresso.GameProgress
@@ -13,8 +14,8 @@
         android:layout_height="match_parent"
         app:coordX="370"
         app:coordY="980"
-        app:cor_circulo="#0000ff"
-        app:cor_texto="#E4BE21"
+        app:cor_circulo="#77777B"
+        app:cor_texto="#77777B"
         app:layout_constraintBottom_toTopOf="parent"
         app:raio="250"
         app:texto="0/1"
@@ -25,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PROGRESSO ATUAL"
+        android:textColor="#C8C9CD"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +39,7 @@
         android:id="@+id/titulo_nome_jogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#C8C9CD"
         android:text="Nome do Jogo:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total de Fases:"
+        android:textColor="#C8C9CD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.09"
@@ -61,6 +65,7 @@
         android:id="@+id/nome_jogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#C8C9CD"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +78,7 @@
         android:id="@+id/total_fases"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#C8C9CD"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +97,9 @@
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986" />
+        app:layout_constraintVertical_bias="0.986"
+        android:backgroundTint="#A52A2A"
+        android:textColor="#C8C9CD"/>
 
     <Button
         android:id="@+id/button_adicionar"
@@ -103,15 +111,20 @@
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986" />
+        app:layout_constraintVertical_bias="0.986"
+        android:backgroundTint="#4169E1"
+        android:textColor="#C8C9CD"/>
 
     <Button
         android:id="@+id/button_atualizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#66CDAA"
         android:text="@string/atualizar_txt"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.986" />
