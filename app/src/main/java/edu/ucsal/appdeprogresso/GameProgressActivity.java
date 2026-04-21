@@ -81,7 +81,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
             String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
 
             int total = Integer.parseInt(totalFasesSalvas);
-            progressoAtualEmPorcentagem = (100f / total) * progressoAtual;
+            progressoAtualEmPorcentagem = (100 * progressoAtual) / total;
 
             GameProgress gameProgress = findViewById(R.id.gameProgress);
             float progresso = progressoAtualEmPorcentagem / 100f;
@@ -118,6 +118,7 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
             Toast.makeText(this, "Progresso já foi completado totalmente!!", Toast.LENGTH_SHORT).show();
         }
     }
+    @SuppressLint("DefaultLocale")
     public void atualizarProgressoEmPorcentagem() {
         SharedPreferences sharedPreferences = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String totalFasesSalvas = sharedPreferences.getString("SAVED_TOTAL_FASES", "0");
@@ -128,8 +129,8 @@ public class GameProgressActivity extends AppCompatActivity implements View.OnCl
 
         if (progressoAtualEmPorcentagem < 100) {
             progressoAtual++;
-            progressoAtualEmPorcentagem = (100/fasesTotal) * progressoAtual;
-            gameProgress.setTexto(progressoAtualEmPorcentagem + "%");
+            progressoAtualEmPorcentagem = (100 * progressoAtual) / fasesTotal;
+            gameProgress.setTexto(String.format("%.0f", progressoAtualEmPorcentagem) + "%");
         } else {
             Toast.makeText(this, "Progresso já foi completado totalmente!!", Toast.LENGTH_SHORT).show();
         }
