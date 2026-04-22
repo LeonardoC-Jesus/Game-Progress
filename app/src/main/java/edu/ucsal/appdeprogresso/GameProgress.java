@@ -66,7 +66,6 @@ public class GameProgress extends View {
         paintProgresso.setStrokeWidth(50f);
     }
 
-
     @Override
     @SuppressLint("DrawAllocation")
     protected void onDraw(@NonNull Canvas canvas) {
